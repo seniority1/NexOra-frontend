@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NexOra Email Verification</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Email Verification</h1>
+    <p id="verify-message">Verifying your email...</p>
+  </div>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+    const token = params.get("token");
+
+    async function verifyEmail() {
+      const msg = document.getElementById("verify-message");
+      try {
+        const res = await fetch(`https://nexora-backend.onrender.com/api/auth/verify/${token}`);
+        const data = await res.json();
+
+        if (res.ok) {
+          msg.textContent = "✅ Email verified successfully! You can now log in.";
+        } else {
+          msg.textContent = data.message || "❌ Verification failed or link expired.";
+        }
+      } catch {
+        msg.textContent = "⚠️ Unable to verify. Please try again later.";
+      }
+    }
+
+    verifyEmail();
+  </script>
+</body>
+</html>

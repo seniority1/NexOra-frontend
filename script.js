@@ -11,7 +11,7 @@ document.getElementById("registerForm").addEventListener("submit", async (e) => 
 
   try {
     // Replace with your Render backend URL
-    const res = await fetch("https://nexora-backend.onrender.com/api/auth/register", {
+    const res = await fetch("https://nexora-backend-qhhc.onrender.com/api/auth/register", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name, email, password }),
